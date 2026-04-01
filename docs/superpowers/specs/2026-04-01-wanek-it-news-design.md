@@ -72,14 +72,14 @@ it_news_template/
 | `{{LAUNCH_TYPE}}` | User selects | New Tool / System Update / Feature Release / New Platform |
 | `{{STATUS}}` | User selects | Now Live / Coming Soon / Beta |
 | `{{HERO_SUB}}` | Auto-generated | `{{DEPARTMENT}} · {{LAUNCH_TYPE}}` |
-| `{{HERO_TITLE_EN}}` | User → AI recommendation | max 6 words |
+| `{{HERO_TITLE_EN}}` | User → AI recommendation | max 6 words. **English only — intentional bilingual exception.** The hero title is a large display element; adding a VI line would break the visual hierarchy. |
 | `{{HERO_HIGHLIGHT}}` | User → AI recommendation | exact substring of `{{HERO_TITLE_EN}}` |
 | `{{DESCRIPTION_EN}}` | User → AI recommendation | max 35 words |
 | `{{DESCRIPTION_VI}}` | User → AI recommendation | max 50 words |
 | `{{FEATURE_COUNT}}` | User selects | 3 or 4 |
 | `{{F1_EN}}` – `{{F4_EN}}` | User → AI recommendation | max 3 words each |
 | `{{F1_VI}}` – `{{F4_VI}}` | User → AI recommendation | max 5 words each |
-| `{{F1_DESC}}` – `{{F4_DESC}}` | User → AI recommendation | max 12 words each |
+| `{{F1_DESC}}` – `{{F4_DESC}}` | User → AI recommendation | max 12 words each. **English only — intentional bilingual exception.** Feature cards are compact; a VI description line would overflow the card bounds. |
 | `{{CONTACT_EN}}` | User → AI recommendation | max 15 words |
 | `{{CONTACT_VI}}` | User → AI recommendation | max 20 words |
 | `{{CTA_TEXT}}` | User → AI recommendation | max 4 words |
@@ -115,18 +115,25 @@ it_news_template/
 - Vietnamese: natural idiomatic Vietnamese, not literal translation
 - Every recommendation states word/char count alongside the suggested copy
 - If user's raw input is already within limits and well-written, AI says so and confirms rather than rewriting
+- If user's raw input exceeds the limit: AI must NOT advance to the next field. AI trims/rewrites the input to fit the constraint, presents the trimmed recommendation explicitly labeled "Trimmed to fit limit:", states the new count, and re-asks for confirmation before proceeding
 
 ### Block 4 — Validation Gate
 - After all groups confirmed, AI presents a full summary table of all locked fields
+- AI validates that `{{HERO_HIGHLIGHT}}` is an exact substring of `{{HERO_TITLE_EN}}`. If not, AI flags the mismatch and requires the user to correct one or both fields. After each correction, AI re-validates immediately. This loop repeats until the substring check passes before the summary proceeds
 - AI explicitly asks: "Does everything look correct? Type yes to generate."
 - No HTML output until user confirms
 
 ### Block 5 — Generation Instructions
-- Read `templates/poster-light.html`
+- Read `.augment/skills/create-poster/templates/poster-light.html` (workspace-relative path)
+- Before replacing tokens, construct derived values:
+  - `{{HERO_SUB}}` = `{{DEPARTMENT}} · {{LAUNCH_TYPE}}` (concatenated from confirmed Group 1 values)
 - Replace all `{{TOKEN}}` placeholders with confirmed values
-- Apply correct grid layout based on `{{FEATURE_COUNT}}`
-- Apply correct pill color/dot color based on `{{STATUS}}`
-- Auto-generate output filename: `YYYY-MM-DD-<product-slug>.html` (slug = lowercase product name EN, spaces → hyphens)
+- Apply correct grid layout based on `{{FEATURE_COUNT}}`:
+  - If `{{FEATURE_COUNT}}` = 4: use `grid-template-columns: 1fr 1fr` (2×2 grid), include all 4 feature blocks
+  - If `{{FEATURE_COUNT}}` = 3: use `grid-template-columns: 1fr 1fr 1fr` (1×3 row), remove the entire 4th feature HTML block (`{{F4_EN}}`, `{{F4_VI}}`, `{{F4_DESC}}` and their wrapper element) from the output — do not leave empty or placeholder content
+- Apply correct pill color/dot color based on `{{STATUS}}` (see Status Pill Variants table)
+- `YYYY-MM-DD` in the output filename = current system date at generation time
+- Auto-generate output filename: `YYYY-MM-DD-<product-slug>.html` (slug = lowercase product name EN, spaces → hyphens, special chars stripped). If stripping produces an empty string, use the fallback slug `poster`
 - Save file to `output/`
 
 ### Block 6 — Locked Constants
