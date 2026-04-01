@@ -158,12 +158,13 @@ After all 2 fields confirmed, summarise Group 4 and ask: "Group 4 confirmed. Rea
 
 ---
 
-## Group 5: Screenshots
+## Group 5: Screenshots (Optional)
 
 **Field — Screenshot count**
-- Ask: "How many screenshots do you want to include? (0, 1, 2, or 3). Place the image files in `assets/screenshots/` before proceeding."
-- Accept 0, 1, 2, or 3
-- If 0: skip the rest of Group 5
+- Ask: "Would you like to include product screenshots? This is optional. If yes, how many? (1, 2, or 3). If not, just say no or 0 to skip."
+- Accept 0 (or "no"/"skip"), 1, 2, or 3
+- If 0 or skipped: skip the rest of Group 5 entirely and move to final review
+- If 1–3: ask user to place the image files in `assets/screenshots/` before proceeding. Screenshots will be scaled to fit the full poster width (540px) automatically.
 
 Then for each screenshot (repeat SCREENSHOT_COUNT times):
 
