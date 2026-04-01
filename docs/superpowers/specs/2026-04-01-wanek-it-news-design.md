@@ -22,7 +22,10 @@ Date: 2026-04-01
 | Top stripe | Gradient `#a04e10 → #e8903a → #f5b060 → #e8903a → #a04e10` |
 | Background | `#FDF8F3` (Warm Ivory) |
 | Bottom bar line 1 | `WANEK FURNITURE CO., LTD.` — hardcoded, never editable |
-| Bottom bar line 2 | `BUILT IN-HOUSE · AI TEAM` — hardcoded, never editable |
+| Bottom bar line 2 | `AI TEAM` — gold text `#f5b060` with gold underline accent, hardcoded, never editable |
+| Bottom bar background | `linear-gradient(135deg, #5a3e28, #a04e10)` — diagonal brown-to-orange |
+| Logo | `logo-removebg.png` — transparent PNG, baked into template as base64. No background, border, or shadow on logo container. |
+| CTA button | Removed — poster is a static image, buttons are not clickable |
 | Feature icons | Orange accent bar (`#e8903a`, 16×2px) — no emoji |
 | Scripts/tooling | None — skill is purely text-driven via SKILL.md |
 
@@ -82,20 +85,23 @@ it_news_template/
 | `{{F1_DESC}}` – `{{F4_DESC}}` | User → AI recommendation | max 12 words each. **English only — intentional bilingual exception.** Feature cards are compact; a VI description line would overflow the card bounds. |
 | `{{CONTACT_EN}}` | User → AI recommendation | max 15 words |
 | `{{CONTACT_VI}}` | User → AI recommendation | max 20 words |
-| `{{CTA_TEXT}}` | User → AI recommendation | max 4 words |
-| `{{CTA_LINK}}` | User provides | URL or `#` |
+| `{{LAYOUT}}` | User selects | `base` or `l3` — determines which template file to use |
 
 ---
 
 ## Layout Variants
 
-### 4-Feature: 2×2 Grid
-- `grid-template-columns: 1fr 1fr`
-- Used when `{{FEATURE_COUNT}}` = 4
+### Base layout (`poster-light.html`)
+- Standard vertical stack: header → hero → divider → features grid → contact → bottom bar
+- 4-Feature: `grid-template-columns: 1fr 1fr` (2×2 grid)
+- 3-Feature: `grid-template-columns: 1fr 1fr 1fr` (1×3 row)
 
-### 3-Feature: 1×3 Row
-- `grid-template-columns: 1fr 1fr 1fr`
-- Used when `{{FEATURE_COUNT}}` = 3
+### L3 layout (`poster-light-l3.html`)
+- Compact hero with EN/VI description inline (not stacked)
+- Features as full-width stacked vertical rows with tall left accent bars
+- EN title and VI title sit inline on the same line per feature
+- 4-Feature: 4 stacked rows
+- 3-Feature: 3 stacked rows (4th block removed via comment markers)
 
 ---
 
@@ -164,8 +170,7 @@ it_news_template/
 ### Group 4: Footer
 12. Contact info (EN) — max 15 words
 13. Contact info (VI) — max 20 words; AI recommends if user provides EN only
-14. CTA button text — max 4 words
-15. CTA link — URL or `#`
+
 
 ---
 

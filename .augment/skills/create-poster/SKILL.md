@@ -67,7 +67,14 @@ Ask these 5 fields in order:
 - Accept number or text. Map to exact value: `Now Live`, `Coming Soon`, `Beta`
 - No recommendation needed — present the confirmed selection
 
-After all 5 fields confirmed, summarise Group 1 and ask: "Group 1 confirmed. Ready for Group 2?"
+**Field 6 — Layout variant**
+- Ask: "Which layout do you prefer?
+  1. Base — standard vertical stack with 2×2 feature grid (or 1×3 for 3 features)
+  2. L3 — compact hero with full-width stacked feature rows, EN/VI titles inline"
+- Accept number or text. Map to exact value: `base` or `l3`
+- No recommendation needed — present the confirmed selection
+
+After all 6 fields confirmed, summarise Group 1 and ask: "Group 1 confirmed. Ready for Group 2?"
 
 ---
 
@@ -147,17 +154,7 @@ Ask these 4 fields in order:
 - Constraint: max 20 words
 - If blank: recommend a natural Vietnamese translation
 
-**Field — CTA button text**
-- Ask: "What should the call-to-action button say? (e.g., Get Access, Learn More, Try It Now)"
-- Constraint: max 4 words
-- Recommend a short action phrase ending with →
-- If over 4 words: trim, label "Trimmed to fit limit:", re-ask
-
-**Field — CTA link**
-- Ask: "What URL should the button link to? (Enter a URL or # if not applicable)"
-- No constraint, no recommendation — use exactly as provided
-
-After all 4 fields confirmed, summarise Group 4 and ask: "Group 4 confirmed. Ready for the final review?"
+After all 2 fields confirmed, summarise Group 4 and ask: "Group 4 confirmed. Ready for the final review?"
 
 ---
 
@@ -200,8 +197,6 @@ FEATURES ([count])
 FOOTER
   Contact (EN):        [value]
   Contact (VI):        [value]
-  CTA text:            [value]
-  CTA link:            [value]
 
 LOCKED (cannot be changed)
   Bottom bar:          WANEK FURNITURE CO., LTD. | BUILT IN-HOUSE · AI TEAM
@@ -220,7 +215,9 @@ Do not produce any HTML until the user types yes (or equivalent confirmation).
 
 When the user confirms, generate the poster as follows:
 
-1. Read `.augment/skills/create-poster/templates/poster-light.html`
+1. Read the template based on the confirmed layout variant:
+   - If `base`: read `.augment/skills/create-poster/templates/poster-light.html`
+   - If `l3`: read `.augment/skills/create-poster/templates/poster-light-l3.html`
 
 2. Construct derived values before replacing tokens:
    - `{{HERO_SUB}}` = `[Department] · [Launch Type]`
@@ -228,7 +225,7 @@ When the user confirms, generate the poster as follows:
      - Now Live: `<div class="pill pill--live"><span class="dot dot--live"></span><span class="pill-text pill-text--live">Now Live</span></div>`
      - Coming Soon: `<div class="pill pill--soon"><span class="dot dot--soon"></span><span class="pill-text pill-text--soon">Coming Soon</span></div>`
      - Beta: `<div class="pill pill--beta"><span class="dot dot--beta"></span><span class="pill-text pill-text--beta">Beta</span></div>`
-   - `{{BENEFITS_CLASS}}` = `benefits--4` if 4 features, `benefits--3` if 3 features
+   - `{{BENEFITS_CLASS}}` = `benefits--4` if 4 features, `benefits--3` if 3 features (only used by `base` layout; L3 layout does not use this token — leave it unreplaced, it will not appear in L3 template)
    - `{{HERO_TITLE_PREFIX}}` = all words in the title that come before the highlighted text (empty string if highlight starts the title)
    - `{{HERO_TITLE_SUFFIX}}` = all words in the title that come after the highlighted text (empty string if highlight ends the title)
 
@@ -256,14 +253,13 @@ When the user confirms, generate the poster as follows:
    - `{{F4_DESC}}` → Feature 4 description (EN) — only used when FEATURE_COUNT = 4
    - `{{CONTACT_EN}}` → confirmed contact info (EN)
    - `{{CONTACT_VI}}` → confirmed contact info (VI)
-   - `{{CTA_TEXT}}` → confirmed CTA button text
-   - `{{CTA_LINK}}` → confirmed CTA link URL or `#`
+
 
 4. If FEATURE_COUNT = 3: remove everything between and including `<!-- FEATURE_4_START -->` and `<!-- FEATURE_4_END -->` from the output. Do not leave any empty elements or placeholder text.
 
 5. If FEATURE_COUNT = 4: leave all 4 feature blocks intact, remove only the comment lines `<!-- FEATURE_4_START -->` and `<!-- FEATURE_4_END -->`.
 
-6. Apply the `{{BENEFITS_CLASS}}` value to the `.benefits` div class attribute.
+6. If layout is `base`: apply the `{{BENEFITS_CLASS}}` value to the `.benefits` div class attribute. If layout is `l3`: skip this step (L3 uses stacked rows, not a grid).
 
 7. Generate the output filename:
    - Date: current system date in YYYY-MM-DD format
