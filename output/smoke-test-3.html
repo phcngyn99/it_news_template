@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applicant Tracking System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #e8ddd3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    padding: 20px;
+  }
+  .poster {
+    width: 540px;
+    background: #FDF8F3;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(201,104,32,0.12);
+  }
+  .top-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, #a04e10, #e8903a, #f5b060, #e8903a, #a04e10);
+  }
+  .header {
+    padding: 18px 32px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(201,104,32,0.12);
+  }
+  .logo-wrap {
+    background: #fff4e8;
+    border-radius: 5px;
+    padding: 5px 11px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .logo-wrap img { height: 26px; display: block; }
+  .pill {
+    display: flex; align-items: center; gap: 6px;
+    border-radius: 20px; padding: 4px 12px;
+  }
+  .pill--live { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.3); }
+  .pill--soon { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); }
+  .pill--beta { background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .dot--live { background: #4ade80; }
+  .dot--soon { background: #f59e0b; }
+  .dot--beta { background: #60a5fa; }
+  .pill-text { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+  .pill-text--live { color: #16a34a; }
+  .pill-text--soon { color: #d97706; }
+  .pill-text--beta { color: #3b82f6; }
+  .hero { padding: 24px 32px 18px; }
+  .hero-sub {
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: #d4782a; font-weight: 600; margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; line-height: 1.2; color: #1c1008; margin-bottom: 12px;
+  }
+  .hero-title span { color: #e8903a; }
+  .hero-desc { font-size: 12.5px; line-height: 1.65; color: #5a3e28; }
+  .hero-desc .vi { color: #b07040; font-size: 11px; display: block; margin-top: 4px; }
+  .div {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,104,32,0.2), transparent);
+    margin: 0 32px;
+  }
+  .benefits { padding: 18px 32px; display: grid; gap: 11px; }
+  .benefits--4 { grid-template-columns: 1fr 1fr; }
+  .benefits--3 { grid-template-columns: 1fr 1fr 1fr; }
+  .benefit {
+    background: rgba(201,104,32,0.05);
+    border: 1px solid rgba(201,104,32,0.12);
+    border-radius: 4px; padding: 13px 15px;
+  }
+  .b-accent { width: 16px; height: 2px; background: #e8903a; border-radius: 1px; margin-bottom: 8px; }
+  .b-en { font-size: 12px; font-weight: 600; color: #1c1008; margin-bottom: 1px; }
+  .b-vi { font-size: 10px; color: #e8903a; margin-bottom: 5px; font-weight: 500; }
+  .b-desc { font-size: 11px; color: #8a6848; line-height: 1.5; }
+  .footer-row {
+    padding: 13px 32px;
+    background: rgba(201,104,32,0.04);
+    border-top: 1px solid rgba(201,104,32,0.1);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .contact-text { font-size: 11px; color: #7a5535; line-height: 1.55; }
+  .contact-text .vi-small { display: block; font-size: 10px; color: #b07040; margin-top: 2px; }
+  .cta-btn {
+    background: linear-gradient(135deg, #b85e18, #e8903a);
+    color: #fff; font-size: 11px; font-weight: 600;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    padding: 10px 22px; border-radius: 3px; border: none;
+    cursor: pointer; white-space: nowrap; text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 4px 14px rgba(184,94,24,0.25);
+  }
+  .bottom {
+    border-top: 1px solid rgba(201,104,32,0.08);
+    padding: 9px 32px;
+    display: flex; justify-content: space-between;
+    background: #fdf0e4;
+  }
+  .bottom span { font-size: 9px; letter-spacing: 1px; color: rgba(28,16,8,0.3); text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top-stripe"></div>
+
+  <div class="header">
+    <div class="logo-wrap">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABSAKoDASIAAhEBAxEB/8QAHQABAAEEAwEAAAAAAAAAAAAAAAgEBQYHAQIDCf/EAEQQAAEDAwIDBgMEBgUNAAAAAAECAwQABREGEgchMQgTFEFRgSJhcRUyQpEjM2KxssEJFjlTghclQ1JldZKhotHh4vD/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIGBAMF/8QALREAAgIBAwIDBgcAAAAAAAAAAAECAxEEBSESMRRBUQYTobHB8CJCUmGBgpH/2gAMAwEAAhEDEQA/AJl0pSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSqSfdLdAKRNmx4xV90OuBOfzrzh3q0zHe5i3KI+5jO1DqVH8ga83dWpdPUsl1XNrqS4K+lcZFdXXmmkFbjiUJAySo4Aq7aSyU88HeleUeSxIaS6w8h1tQyFIVkEV6bh60TTWUGsPDOaVTOT4bTnduSmUL64UsA1y1NiOuhpqQ0tZBISlQJwKjrj6lumXoVFKUyKsVFKZpkUApTNM0ApTIpQClKZoBSmRTNAKUpQGMcRtP/bun3EtJzLYBcY9SfNPvWk7DcXLReGZqUBXdrw4g/iT5ipJKrSXFnT4td68ew3iNLJJAHJK/Me/Wsf7TaKUXHWVd13+jNb7N61S6tHb2fb6o2NfLn4TSDt9tD+UdyHG0r+JJzj3HWteaV+2NZ6gBuct12JH/AEjqc4R8k4HLmapdP31S9G3TTzyioqRujD1JUMp/n+dbO0JYUaf02lpwJEl1PeSF/tY6fQDlUVylu11ck2oKOZL9+ePvyFsY7VTZFpObeIvzxhc/fmY3wruzMpUmySDsfYWpUdaThSkZ+788fuNW7iVqe+QL49ZokwttISn4kJwtW5IPX3rCok9+1ag8cwSlxl4q+o3HI/eKz+229nVnEFV5A3wGmmXFEjkV7BhPt/KuOnWW6vTeFreJ9WOP08/I7LtHVpNT4qxZg45/tx8zDeJXEC6cDNG2rUD2m1XtN3fLcx9UgoUw5t3NoPI5ykK90n1rYvAzXTPEvQ8TWSIzcUvqW0YyXN/clKsEE4HM8v8AlTjxpJrXvDK8aS2IVIlRy7HUR+qcbwpCv+IAe5+dQj7PnGyXwi0rrTTs1h1cxxvfbWVDk3MCu7UFegA+L/AfWtppqIU1xqj+Ux2ovndY7Jd5H0Hs+obLeZlxh2y4sSpFtf8ADzG21ZLLmAdp9iK0bx/7SbXDDXjelI2nRenzHQ6sok7ShSicJxg8/wDvUVOzhxfuXDfigb5fnZT9qvaiLqVAlS9yiQ8B5lKienUEir9wYKeKHaLu/EjVB7uy2Zbt8nKc5pabayWkH6bR9dp9a6TnJkRuK9vZ4k2Dh7eWEQb9dLX415oOhSY7pGe5z5nAVz/ZrO9R3A2nT1yuyWg6YcR2QEE43bEFWM/PFfMHVuqdYaj13c+M8Vp9lti8Nlp8c0xldWWj/hSB8+frX0HtWs4Gv+z9L1XbyAidY5CnWwcll0NKDjZ+YUCPmMHzoDVHCXtb2bV+uImnL3Yk2FuYru2ZSpO9He/hSrkMZ6Z+lbs4y60Xw/4d3PVrcAXDwKUrLBc2bgVAHng46182eHfDW8640xqe82Eqdm2BLchUZI+J1slW4p/aG3Nbcicdv629mfUegtWSsX+HFQIUhxXOY0lafhJ/vEge4+dASA0/2g3rtwAvXFYaaQ0LZN8MIXic94Mtgq3Y5frOmPKtYp7bjqhlPD8n6Tv/AFrGuHv9n5rL/e6v4o9Wbs8doux8L+H40zcdHv3Z4SnH+/S8hIwrHLBSTyxQG6uEHaqc1/xHs+kFaN8ALk4tHiPFb+72tqXnG0Z+7j3rILD2gpN07RCuE39W2m9st6OZ3iCeTbSnM7cdSE46+dbB4J6wt3EnQkPWEayN21D7ziW2lbVKRsVtzuAFQR4iayn8P+1jqTVlrZaemwp0kMJd+6FuMKbCiPPG/OPPFAS77RvaBtPCaXBtcaIzebtIyt6IHtpYb8lKIzjJ8qzHghrHU2vNJt6kvul06ejygFQmVvFbjrZ/0hGBtSfL1HPpjMDuzzIs2qO0VbZHFJT8924v70GWfhdlKwWg4D1SeQA6c0jpX0vQAEgJAAAwMUByKUpQHBq0atszV9sUiA4AFKTuaUfwrHQ1eKYrztqjbBwmspl67JVTU4cNEedKRnGNbQoslva43K2uJUOiga3zKJdcRET+IbnD6J/81hWtLEmJrK16hYRhtT6UyAB+LHI+/T8qziC0pKFOu/rXTuV8h5D2H8/Ws/smilo3bQ/X4YPvb3rI6tVXr0+OeTUnF/TvgLkm7xUYjyjhwAfdc9fof31lHBsoa0e46rAHiFlR9hWV6itTF4tEiA+MpcThJP4T5H2NYtwzhSI1oetL6SlTEtZfz6csD36/Sqw27wu6++gvwyT/AIfBM9w8TtfuZvmLX+cmYQUKIVJcHxu8+fkkdB/96moNcd+BFzvHajjWWxRlNW7Uh8et8J+COgH9Oo/Q9B5lSfWpvamuQsunbhdu6Lwhx1vd2DjdtGcVYFapQ2wuXLtyBIaVFbGMghMh9LXLcAQM4JHnitJFYWDPSeXk012qOBFtuvCCAvR9uCLlpWLtjNNp+ORHSMrRy6q6qHqc+tR3vDn+TfswQrMj9FfNdveLleS0QWz8CfkFEA/T61Ne18TWpHh1S7WtuM5tL76VHawhSEq3KCgDgbkgnpg56CrbPkaa1GmHPncP9PXFIiLUlc2K0442htlt3YnKDyw4AB05VYgizYOBfaFXw3OmIQtTOnbnsmOw3HGt5UQFAlRQVBQ5dDy5179lHW8rTEbXXCm/rLJdhTlR21q/Vym2lpcQPqE/9NS11Br9iwBmLFtKCyiGh5CU5SlKO7KggBIITyAHPAGeoFUFotmhZL15urvDnTjAgGSpx5NqaLrhbUpKzu7vBJwehPXnQEff6Nwf531nn+6j/wAS6snbX4FjTNwe4haUi7bNLczcYraeUV1R++kf6ij1HkT6GpV2JFs05JRGsGjNO2mfPaD2IKWmQpoJKvjKEg55EDPI8znkat914g2O9WWRFuWmmrhHU+hJiS0JcQ4ypG4OqSoEY3hScY6geooCMnD3+z91kP8Aayv4mKtnZz476D4ecPRp/UWknLrNEpx7v0stKG1WMDKhnyqUMO96Lj2pvT7+grPFts5wvPRUQG0xlnY2W3FNlABKlnYCR1bUegFeERnhrJYDyOFGnDsDCH2xaYxcZde3BtBGzoVBIz+2k9M0BjvCXtNaI1brS1aK0/pWbbXLk8sIO1tDSCEKWVEJ9dprQcDTln1b28pVjv0VMu3P3eQ48wo/C53bCnEpPqNyBkeY5VMVmyaJ06/cbnB0Hp6DcLPFEkPRLcy24CUKJCVpSCOWRn51YbZedFq1PGuEXQVmZvbkpaXJqYbKX23DKbjhXeBO7Kg7uznOOXnQGmO3zwxSxGgcTbBHEdcXu4s8MDbsSOTTgx0wcJz9K3f2XuJ6OJvDCHcJTyFXqEBGuSBgEuAcnMeihz+uaudyv6rwlqx3vTVsnsTHnW1sPJL7RDSwMqSUEdeYyPKqjhy1p+JcnmrPo+y2JUlpbiXLfGbaLiEOlvC9iQc5GfMUBngORSuE9K5oBSlKA6OtocGFoSoA5AIzXbpXNKjAOvnXCG0IWtSUhJWcqIHU9Odd8D0pTAOkhlmQwtiQ0h1pxJStC0hSVA9QQeoqllWi1S5zU6VbYb8pnk084ylS0fRRGR1P51W0qQUX2Tat4X9mxNwa7kHuU57vGNnT7uOWOldo1st0YITHgRWQgFKAhpKdoICSBgcuSUj6AelVdKAtsTT9ihslmJZrfHaIUChuMhIIUMKGAPMcjXeFZLPBkOSIVqhRnnQQ4tphKVKz1yQOdV9KAtI0zp0RlRhYbZ3Cl7y34VG0qxjOMdccs17rstnWreu1QVKxjJYSTjIOOnqAfaq+lAUj1rtr6XEvQIriXG0trC2knchOdqTkcwMnA8smibZbUqUpMCKkqLZUQ0nmWzlvPL8JAx6eVVdKAoZNntMmYZki2Q3pJbLZeWylSygggpyRnGCRj51wiyWdDpdRaoSXCoLKgwkHcFBQOcdQUpOfUA+VV9KAt8uxWWWWzKtMF8tqUtBcjpVtUo5JGRyJPWu1us9ptrrztvtkOIt9RU6pllKCskkknA58yT71XUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoD/9k=" alt="Wanek">
+    </div>
+    <div class="pill pill--soon"><span class="dot dot--soon"></span><span class="pill-text pill-text--soon">Coming Soon</span></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-sub">IT Department · New Tool</div>
+    <h1 class="hero-title">Meet Your New <span>ATS Platform.</span></h1>
+    <p class="hero-desc">
+      Our in-house Applicant Tracking System is officially live — making hiring faster, smarter, and fully transparent.
+      <span class="vi">Hệ thống nội bộ đã chính thức ra mắt — tuyển dụng nhanh hơn, rõ ràng hơn.</span>
+    </p>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="benefits benefits--3">
+    <div class="benefit">
+      <div class="b-accent"></div>
+      <div class="b-en">Faster Screening</div>
+      <div class="b-vi">Sàng lọc nhanh hơn</div>
+      <div class="b-desc">Auto-rank candidates by role criteria.</div>
+    </div>
+    <div class="benefit">
+      <div class="b-accent"></div>
+      <div class="b-en">Full Visibility</div>
+      <div class="b-vi">Minh bạch toàn trình</div>
+      <div class="b-desc">Real-time pipeline tracking for every position.</div>
+    </div>
+    <div class="benefit">
+      <div class="b-accent"></div>
+      <div class="b-en">Team Collaboration</div>
+      <div class="b-vi">Phối hợp nội bộ</div>
+      <div class="b-desc">HR and hiring managers work together seamlessly.</div>
+    </div>
+  </div>
+
+  <div class="footer-row">
+    <div class="contact-text">
+      Contact IT Dept. for access and onboarding.
+      <span class="vi-small">Liên hệ bộ phận IT để được hướng dẫn sử dụng.</span>
+    </div>
+    <a class="cta-btn" href="#">Get Access →</a>
+  </div>
+
+  <div class="bottom">
+    <span>WANEK FURNITURE CO., LTD.</span>
+    <span>BUILT IN-HOUSE · AI TEAM</span>
+  </div>
+</div>
+</body>
+</html>
