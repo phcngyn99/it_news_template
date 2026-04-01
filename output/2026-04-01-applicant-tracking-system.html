@@ -54,36 +54,35 @@
   .pill-text--live { color: #16a34a; }
   .pill-text--soon { color: #d97706; }
   .pill-text--beta { color: #3b82f6; }
-  /* Hero - compact for L3 */
-  .hero { padding: 20px 32px 14px; }
+  .hero { padding: 24px 32px 18px; }
   .hero-sub {
     font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
-    color: #d4782a; font-weight: 600; margin-bottom: 8px;
+    color: #d4782a; font-weight: 600; margin-bottom: 10px;
   }
   .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: 28px; line-height: 1.2; color: #1c1008; margin-bottom: 8px;
+    font-size: 30px; line-height: 1.2; color: #1c1008; margin-bottom: 12px;
   }
   .hero-title span { color: #e8903a; }
-  .hero-desc { font-size: 12px; line-height: 1.6; color: #5a3e28; }
-  .hero-desc .vi { color: #b07040; font-size: 10.5px; display: inline; }
-  /* Features - stacked vertical rows */
-  .features { padding: 0 32px 14px; display: flex; flex-direction: column; gap: 8px; }
-  .feature-row {
-    display: flex; align-items: center; gap: 12px;
-    padding: 10px 14px;
+  .hero-desc { font-size: 12.5px; line-height: 1.65; color: #5a3e28; }
+  .hero-desc .vi { color: #b07040; font-size: 11px; display: block; margin-top: 4px; }
+  .div {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,104,32,0.2), transparent);
+    margin: 0 32px;
+  }
+  .benefits { padding: 18px 32px; display: grid; gap: 11px; }
+  .benefits--4 { grid-template-columns: 1fr 1fr; }
+  .benefits--3 { grid-template-columns: 1fr 1fr 1fr; }
+  .benefit {
     background: rgba(201,104,32,0.05);
     border: 1px solid rgba(201,104,32,0.12);
-    border-radius: 4px;
+    border-radius: 4px; padding: 13px 15px;
   }
-  .f-accent {
-    width: 3px; height: 28px;
-    background: #e8903a; border-radius: 1px; flex-shrink: 0;
-  }
-  .f-content { flex: 1; }
-  .f-title-line { font-size: 12px; font-weight: 600; color: #1c1008; }
-  .f-title-line .f-vi { font-weight: 500; color: #e8903a; font-size: 10px; margin-left: 4px; }
-  .f-desc { font-size: 11px; color: #8a6848; margin-top: 2px; line-height: 1.45; }
+  .b-accent { width: 16px; height: 2px; background: #e8903a; border-radius: 1px; margin-bottom: 8px; }
+  .b-en { font-size: 12px; font-weight: 600; color: #1c1008; margin-bottom: 1px; }
+  .b-vi { font-size: 10px; color: #e8903a; margin-bottom: 5px; font-weight: 500; }
+  .b-desc { font-size: 11px; color: #8a6848; line-height: 1.5; }
   /* Screenshots */
   .screenshots { padding: 14px 32px; }
   .screenshots .section-label {
@@ -92,10 +91,10 @@
   }
   .screenshots .ss-stack { display: flex; flex-direction: column; gap: 8px; }
   .screenshots .ss-stack img {
-    width: 100%; border-radius: 4px; display: block;
+    width: 100%; max-width: 100%; height: auto; object-fit: contain;
+    border-radius: 4px; display: block;
     border: 1px solid rgba(201,104,32,0.12);
   }
-  /* Footer */
   .footer-row {
     padding: 13px 32px 13px 28px;
     background: rgba(201,104,32,0.04);
@@ -104,6 +103,7 @@
   }
   .contact-text { font-size: 11px; color: #7a5535; line-height: 1.55; }
   .contact-text .vi-small { font-size: 10px; color: #b07040; margin-left: 6px; }
+
   .bottom {
     background: linear-gradient(135deg, #5a3e28, #a04e10);
     padding: 9px 32px 7px;
@@ -130,39 +130,38 @@
     <div class="hero-sub">IT Department · New Tool</div>
     <h1 class="hero-title">Meet Your New <span>ATS Platform.</span></h1>
     <p class="hero-desc">
-      Our in-house Applicant Tracking System is officially live — making hiring faster, smarter, and fully transparent. <span class="vi">Hệ thống nội bộ đã chính thức ra mắt — tuyển dụng nhanh hơn, rõ ràng hơn.</span>
+      Our in-house Applicant Tracking System is officially live — making hiring faster, smarter, and fully transparent.
+      <span class="vi">Hệ thống nội bộ đã chính thức ra mắt — tuyển dụng nhanh hơn, rõ ràng hơn.</span>
     </p>
   </div>
 
-  <div class="features">
-    <div class="feature-row">
-      <div class="f-accent"></div>
-      <div class="f-content">
-        <div class="f-title-line">Faster Screening <span class="f-vi">Sàng lọc nhanh hơn</span></div>
-        <div class="f-desc">Auto-rank candidates by role criteria.</div>
-      </div>
+  <div class="div"></div>
+
+  <div class="benefits benefits--4">
+    <div class="benefit">
+      <div class="b-accent"></div>
+      <div class="b-en">Faster Screening</div>
+      <div class="b-vi">Sàng lọc nhanh hơn</div>
+      <div class="b-desc">Auto-rank candidates by role criteria.</div>
     </div>
-    <div class="feature-row">
-      <div class="f-accent"></div>
-      <div class="f-content">
-        <div class="f-title-line">Full Visibility <span class="f-vi">Minh bạch toàn trình</span></div>
-        <div class="f-desc">Real-time pipeline tracking for every position.</div>
-      </div>
+    <div class="benefit">
+      <div class="b-accent"></div>
+      <div class="b-en">Full Visibility</div>
+      <div class="b-vi">Minh bạch toàn trình</div>
+      <div class="b-desc">Real-time pipeline tracking for every position.</div>
     </div>
-    <div class="feature-row">
-      <div class="f-accent"></div>
-      <div class="f-content">
-        <div class="f-title-line">Team Collaboration <span class="f-vi">Phối hợp nội bộ</span></div>
-        <div class="f-desc">HR and hiring managers work together seamlessly.</div>
-      </div>
+    <div class="benefit">
+      <div class="b-accent"></div>
+      <div class="b-en">Team Collaboration</div>
+      <div class="b-vi">Phối hợp nội bộ</div>
+      <div class="b-desc">HR and hiring managers work together seamlessly.</div>
     </div>
     <!-- FEATURE_4_START -->
-    <div class="feature-row">
-      <div class="f-accent"></div>
-      <div class="f-content">
-        <div class="f-title-line">Smart Reports <span class="f-vi">Báo cáo thông minh</span></div>
-        <div class="f-desc">Weekly and monthly hiring analytics at a glance.</div>
-      </div>
+    <div class="benefit">
+      <div class="b-accent"></div>
+      <div class="b-en">Smart Reports</div>
+      <div class="b-vi">Báo cáo thông minh</div>
+      <div class="b-desc">Weekly and monthly hiring analytics at a glance.</div>
     </div>
     <!-- FEATURE_4_END -->
   </div>
