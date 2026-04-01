@@ -86,6 +86,8 @@ it_news_template/
 | `{{CONTACT_EN}}` | User → AI recommendation | max 15 words |
 | `{{CONTACT_VI}}` | User → AI recommendation | max 20 words |
 | `{{LAYOUT}}` | User selects | `base` or `l3` — determines which template file to use |
+| `{{SCREENSHOTS}}` | AI-generated | 0–3 `<img>` tags, base64-encoded from `assets/screenshots/`. Entire screenshot section removed if count = 0. |
+| `{{SCREENSHOT_COUNT}}` | User selects | 0, 1, 2, or 3 |
 
 ---
 
@@ -171,6 +173,13 @@ it_news_template/
 12. Contact info (EN) — max 15 words
 13. Contact info (VI) — max 20 words; AI recommends if user provides EN only
 
+### Group 5: Screenshots
+14. Screenshot count — 0, 1, 2, or 3
+15. For each screenshot: filename in `assets/screenshots/` (e.g., `dashboard.png`)
+    - Files must be placed in `assets/screenshots/` before intake
+    - AI reads and embeds as base64
+    - Stacked vertically at full width, "PREVIEW" section label above
+    - If count = 0: entire screenshot section removed from output
 
 ---
 

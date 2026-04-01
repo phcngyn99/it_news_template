@@ -154,7 +154,25 @@ Ask these 4 fields in order:
 - Constraint: max 20 words
 - If blank: recommend a natural Vietnamese translation
 
-After all 2 fields confirmed, summarise Group 4 and ask: "Group 4 confirmed. Ready for the final review?"
+After all 2 fields confirmed, summarise Group 4 and ask: "Group 4 confirmed. Ready for Group 5?"
+
+---
+
+## Group 5: Screenshots
+
+**Field — Screenshot count**
+- Ask: "How many screenshots do you want to include? (0, 1, 2, or 3). Place the image files in `assets/screenshots/` before proceeding."
+- Accept 0, 1, 2, or 3
+- If 0: skip the rest of Group 5
+
+Then for each screenshot (repeat SCREENSHOT_COUNT times):
+
+**Screenshot N — Filename**
+- Ask: "Screenshot [N] — what is the filename? (e.g., dashboard.png)"
+- The file must exist in `assets/screenshots/`
+- No recommendation — use exactly as provided
+
+After all filenames confirmed (or if count is 0), summarise Group 5 and ask: "Group 5 confirmed. Ready for the final review?"
 
 ---
 
@@ -172,7 +190,7 @@ After all 2 fields confirmed, summarise Group 4 and ask: "Group 4 confirmed. Rea
 
 ## Validation Gate
 
-After Group 4 is confirmed, present a full summary table:
+After Group 5 is confirmed, present a full summary table:
 
 ```
 PRODUCT BASICS
@@ -198,8 +216,12 @@ FOOTER
   Contact (EN):        [value]
   Contact (VI):        [value]
 
+SCREENSHOTS
+  Count:               [0/1/2/3]
+  Files:               [filename1, filename2, ...] (or "None")
+
 LOCKED (cannot be changed)
-  Bottom bar:          WANEK FURNITURE CO., LTD. | BUILT IN-HOUSE · AI TEAM
+  Bottom bar:          WANEK FURNITURE CO., LTD. | AI TEAM
 ```
 
 Then validate:
@@ -253,7 +275,7 @@ When the user confirms, generate the poster as follows:
    - `{{F4_DESC}}` → Feature 4 description (EN) — only used when FEATURE_COUNT = 4
    - `{{CONTACT_EN}}` → confirmed contact info (EN)
    - `{{CONTACT_VI}}` → confirmed contact info (VI)
-
+   - `{{SCREENSHOTS}}` → generated screenshot HTML (see step 7)
 
 4. If FEATURE_COUNT = 3: remove everything between and including `<!-- FEATURE_4_START -->` and `<!-- FEATURE_4_END -->` from the output. Do not leave any empty elements or placeholder text.
 
@@ -261,7 +283,11 @@ When the user confirms, generate the poster as follows:
 
 6. If layout is `base`: apply the `{{BENEFITS_CLASS}}` value to the `.benefits` div class attribute. If layout is `l3`: skip this step (L3 uses stacked rows, not a grid).
 
-7. Generate the output filename:
+7. Handle screenshots:
+   - If SCREENSHOT_COUNT = 0: remove everything between and including `<!-- SCREENSHOTS_START -->` and `<!-- SCREENSHOTS_END -->` from the output.
+   - If SCREENSHOT_COUNT >= 1: for each confirmed filename, read the file from `assets/screenshots/[filename]`, convert it to base64, and generate an `<img>` tag: `<img src="data:image/png;base64,[BASE64]" alt="Screenshot [N]">`. Replace `{{SCREENSHOTS}}` with all generated `<img>` tags concatenated (one per line). If the file extension is `.jpg` or `.jpeg`, use `data:image/jpeg;base64,` instead of `data:image/png;base64,`.
+
+8. Generate the output filename:
    - Date: current system date in YYYY-MM-DD format
    - Slug: product name (EN) lowercased, spaces replaced with hyphens, strip all characters that are not alphanumeric or hyphens
    - If slug is empty after stripping: use `poster`

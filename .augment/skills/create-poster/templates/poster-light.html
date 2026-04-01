@@ -83,6 +83,17 @@
   .b-en { font-size: 12px; font-weight: 600; color: #1c1008; margin-bottom: 1px; }
   .b-vi { font-size: 10px; color: #e8903a; margin-bottom: 5px; font-weight: 500; }
   .b-desc { font-size: 11px; color: #8a6848; line-height: 1.5; }
+  /* Screenshots */
+  .screenshots { padding: 14px 32px; }
+  .screenshots .section-label {
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: #d4782a; font-weight: 600; margin-bottom: 10px;
+  }
+  .screenshots .ss-stack { display: flex; flex-direction: column; gap: 8px; }
+  .screenshots .ss-stack img {
+    width: 100%; border-radius: 4px; display: block;
+    border: 1px solid rgba(201,104,32,0.12);
+  }
   .footer-row {
     padding: 13px 32px 13px 28px;
     background: rgba(201,104,32,0.04);
@@ -153,6 +164,15 @@
     </div>
     <!-- FEATURE_4_END -->
   </div>
+
+  <!-- SCREENSHOTS_START -->
+  <div class="screenshots">
+    <div class="section-label">Preview</div>
+    <div class="ss-stack">
+      {{SCREENSHOTS}}
+    </div>
+  </div>
+  <!-- SCREENSHOTS_END -->
 
   <div class="footer-row">
     <div class="contact-text">
