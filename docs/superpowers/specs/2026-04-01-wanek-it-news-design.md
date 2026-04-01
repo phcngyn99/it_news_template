@@ -142,9 +142,24 @@ it_news_template/
 - Apply correct pill color/dot color based on `{{STATUS}}` (see Status Pill Variants table)
 - `YYYY-MM-DD` in the output filename = current system date at generation time
 - Auto-generate output filename: `YYYY-MM-DD-<product-slug>.html` (slug = lowercase product name EN, spaces → hyphens, special chars stripped). If stripping produces an empty string, use the fallback slug `poster`
-- Save file to `output/`
+- Save standard poster to `output/`
+- **Auto-generate 1-2 pro variants** using `ui-ux-pro-max` design system search (see Block 6)
 
-### Block 6 — Locked Constants
+### Block 6 — Pro Variants (ui-ux-pro-max integration)
+- After standard poster is saved, automatically run: `python3 .augment/skills/ui-ux-pro-max/scripts/search.py "[product] [department] [type]" --design-system -f markdown`
+- Extract typography, color palette, and style recommendations
+- Generate 1-2 pro variant HTML files by modifying the standard poster's `<style>` block
+- Pro variant filenames: `YYYY-MM-DD-[slug]-pro-1.html`, `YYYY-MM-DD-[slug]-pro-2.html`
+- **Pro variant constraints:**
+  - Primary color: orange (must remain dominant)
+  - Theme: light only
+  - Logo: same transparent PNG
+  - Bottom bar text: locked (`WANEK FURNITURE CO., LTD.` + `AI TEAM`)
+  - Width: 540px
+  - Content: identical to standard poster
+- **Pro variants CAN change:** fonts (Google Fonts), background color (must be light), gradients, card styling, pill colors, accent colors
+
+### Block 7 — Locked Constants (standard poster)
 - Never modify regardless of user input: bottom bar text, stripe gradient, fonts, poster width, background color
 
 ---
@@ -184,7 +199,9 @@ it_news_template/
 ---
 
 ## Output Naming Convention
-- Pattern: `YYYY-MM-DD-<product-slug>.html`
+- Standard: `YYYY-MM-DD-<product-slug>.html`
+- Pro variant 1: `YYYY-MM-DD-<product-slug>-pro-1.html`
+- Pro variant 2: `YYYY-MM-DD-<product-slug>-pro-2.html`
 - Slug: product name EN lowercased, spaces replaced with hyphens, special chars stripped
-- Example: "Applicant Tracking System" → `2026-04-01-applicant-tracking-system.html`
+- Example: "Applicant Tracking System" → `2026-04-01-applicant-tracking-system.html`, `-pro-1.html`, `-pro-2.html`
 - Saved to: `output/`

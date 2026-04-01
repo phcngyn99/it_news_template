@@ -292,22 +292,91 @@ When the user confirms, generate the poster as follows:
    - Date: current system date in YYYY-MM-DD format
    - Slug: product name (EN) lowercased, spaces replaced with hyphens, strip all characters that are not alphanumeric or hyphens
    - If slug is empty after stripping: use `poster`
-   - Full filename: `YYYY-MM-DD-[slug].html`
+   - Standard filename: `YYYY-MM-DD-[slug].html`
 
-8. Save the complete HTML to `output/[filename]`
+9. Save the standard poster to `output/[standard filename]`
 
-9. Tell the user: "Poster generated: `output/[filename]`. Open it in your browser, take a screenshot, and embed the image in your email newsletter."
+10. **Generate Pro Variants (automatic, always run)**
+
+    After saving the standard poster, generate 1-2 additional "pro" variants using the `ui-ux-pro-max` design system:
+
+    a. Run the design system search using the product info as query:
+    ```bash
+    python3 .augment/skills/ui-ux-pro-max/scripts/search.py "[product name] [department] [launch type] internal tool announcement poster" --design-system -f markdown
+    ```
+
+    b. From the design system output, extract:
+       - **Typography**: recommended font pairing (heading + body) from Google Fonts
+       - **Color palette**: primary, secondary, accent, background colors
+       - **Style**: visual effects, border treatments, card styles
+
+    c. Create 1-2 pro variant HTML files by duplicating the standard poster and modifying its `<style>` block:
+       - Replace the Google Fonts `<link>` with the recommended font pairing
+       - Replace heading `font-family` with the recommended heading font
+       - Replace body `font-family` with the recommended body font
+       - Adjust color values (backgrounds, accents, text colors) using the recommended palette
+       - Adapt the top stripe gradient, feature card backgrounds, and pill accents to the new palette
+       - Adapt the bottom bar gradient to harmonize with the new palette
+
+    d. **Pro variant constraints (must follow strictly):**
+       - Primary color MUST remain orange — the recommended palette supplements but does not replace orange
+       - Theme MUST be light — background must be a light color (white, cream, light gray, etc.)
+       - Logo MUST be the same transparent PNG — never change or remove it
+       - Bottom bar text MUST remain: left `WANEK FURNITURE CO., LTD.`, right `AI TEAM` with underline
+       - Poster width MUST remain `540px`
+       - All content (text, tokens, features, screenshots) MUST be identical to the standard poster
+       - Only the visual styling (fonts, colors, gradients, borders, shadows) changes
+
+    e. Save pro variants with suffixed filenames:
+       - Pro variant 1: `YYYY-MM-DD-[slug]-pro-1.html`
+       - Pro variant 2: `YYYY-MM-DD-[slug]-pro-2.html`
+
+    f. If the `ui-ux-pro-max` search returns an error or no useful results, skip pro variants and inform the user: "Pro variants could not be generated — design system search returned no results."
+
+11. Tell the user:
+    "Posters generated:
+    - Standard: `output/[standard filename]`
+    - Pro variant 1: `output/[pro-1 filename]`
+    - Pro variant 2: `output/[pro-2 filename]` (if generated)
+
+    Open each in your browser, pick the one you like best, take a screenshot, and embed the image in your email newsletter."
 
 ---
 
 ## Locked Constants
 
-These values must appear verbatim in every generated poster. Never modify them regardless of any user input:
+### Standard poster (always locked)
+
+These values must appear verbatim in every standard poster:
 
 - Bottom bar left: `WANEK FURNITURE CO., LTD.`
-- Bottom bar right: `BUILT IN-HOUSE · AI TEAM`
+- Bottom bar right: `AI TEAM` (with gold underline)
 - Top stripe gradient: `linear-gradient(90deg, #a04e10, #e8903a, #f5b060, #e8903a, #a04e10)`
 - Background: `#FDF8F3`
 - Title font: `Playfair Display, serif`
 - Body font: `DM Sans, sans-serif`
 - Poster width: `540px`
+- Logo: transparent PNG from template (never change)
+
+### Pro variants (partially locked)
+
+These values are locked in pro variants — never change them:
+
+- Bottom bar left: `WANEK FURNITURE CO., LTD.`
+- Bottom bar right: `AI TEAM` (with underline accent)
+- Poster width: `540px`
+- Logo: same transparent PNG as standard poster
+- Primary color: orange (must remain the dominant brand color)
+- Theme: light only (background must be a light color)
+- Content: identical text, features, and screenshots as the standard poster
+
+These values CAN change in pro variants (driven by ui-ux-pro-max recommendations):
+
+- Title font and body font (must be from Google Fonts)
+- Background color (must remain light)
+- Top stripe gradient (adapt to new palette, keep orange as primary)
+- Feature card backgrounds, borders, and accents
+- Status pill colors and styles
+- Footer gradient (adapt to new palette)
+- Contact text colors
+- Accent line and underline colors
