@@ -11,7 +11,7 @@ Activate when the user says any of: "create poster", "new poster", "generate pos
 
 When activated, introduce yourself:
 
-> "I will help you create a Wanek IT News poster. We will go through 4 groups of questions — I will ask for your raw input and suggest polished copy for each field. Nothing is generated until you confirm everything at the end.
+> "I will help you create a Wanek IT News poster. We will go through 4 groups of questions - I will ask for your raw input and suggest polished copy for each field. Nothing is generated until you confirm everything at the end.
 >
 > Let's start with Group 1: Product Basics."
 
@@ -34,45 +34,45 @@ For every field:
 
 Ask these 5 fields in order:
 
-**Field 1 — Product name (English)**
+**Field 1 - Product name (English)**
 - Ask: "What is the product name in English?"
 - Constraint: max 40 characters
 - Recommend a clean, title-cased version
 
-**Field 2 — Product name (Vietnamese)**
+**Field 2 - Product name (Vietnamese)**
 - Ask: "What is the product name in Vietnamese? (Leave blank if you want me to suggest one from the English name)"
 - Constraint: max 50 characters
 - If blank: recommend a Vietnamese translation
 - If provided: recommend a refined version or confirm if already clean
 
-**Field 3 — Department / Team**
+**Field 3 - Department / Team**
 - Ask: "Which department or team owns this product? (e.g., IT Department, HR Department, Finance Team)"
 - Constraint: max 30 characters
 - Recommend a clean, title-cased version
 
-**Field 4 — Launch type**
+**Field 4 - Launch type**
 - Ask: "What type of launch is this? Choose one:
   1. New Tool
   2. System Update
   3. Feature Release
   4. New Platform"
 - Accept number or text. Map to exact value: `New Tool`, `System Update`, `Feature Release`, `New Platform`
-- No recommendation needed — present the confirmed selection
+- No recommendation needed - present the confirmed selection
 
-**Field 5 — Status**
+**Field 5 - Status**
 - Ask: "What is the current status? Choose one:
   1. Now Live
   2. Coming Soon
   3. Beta"
 - Accept number or text. Map to exact value: `Now Live`, `Coming Soon`, `Beta`
-- No recommendation needed — present the confirmed selection
+- No recommendation needed - present the confirmed selection
 
-**Field 6 — Layout variant**
+**Field 6 - Layout variant**
 - Ask: "Which layout do you prefer?
-  1. Base — standard vertical stack with 2×2 feature grid (or 1×3 for 3 features)
-  2. L3 — compact hero with full-width stacked feature rows, EN/VI titles inline"
+  1. Base - standard vertical stack with 2×2 feature grid (or 1×3 for 3 features)
+  2. L3 - compact hero with full-width stacked feature rows, EN/VI titles inline"
 - Accept number or text. Map to exact value: `base` or `l3`
-- No recommendation needed — present the confirmed selection
+- No recommendation needed - present the confirmed selection
 
 After all 6 fields confirmed, summarise Group 1 and ask: "Group 1 confirmed. Ready for Group 2?"
 
@@ -82,25 +82,25 @@ After all 6 fields confirmed, summarise Group 1 and ask: "Group 1 confirmed. Rea
 
 Ask these 4 fields in order:
 
-**Field 6 — Hero title (English)**
-- Ask: "Give me a headline for the poster — describe the product in a punchy phrase. I will shape it into the hero title."
+**Field 6 - Hero title (English)**
+- Ask: "Give me a headline for the poster - describe the product in a punchy phrase. I will shape it into the hero title."
 - Constraint: max 6 words, no punctuation except a period at the end
 - Recommend a 4–6 word title in sentence case ending with a period
 - State word count in recommendation
 
-**Field 7 — Highlight word(s)**
+**Field 7 - Highlight word(s)**
 - Ask: "Which word or words in the title should be highlighted in orange? It must be an exact part of the title we just confirmed."
 - Constraint: must be an exact substring of Field 6 value
 - Recommend the product name or the most distinctive noun phrase from the title
 - If the user's choice is not a substring of the title, flag it immediately: "That text does not appear exactly in the title '[TITLE]'. Please choose words that match exactly."
 
-**Field 8 — Description (English)**
+**Field 8 - Description (English)**
 - Ask: "Describe the product in 2–3 sentences for the poster. What does it do and why does it matter?"
 - Constraint: max 35 words
 - Recommend a polished version, state word count
 - If over 35 words: trim, label "Trimmed to fit limit:", state new count, re-ask for confirmation
 
-**Field 9 — Description (Vietnamese)**
+**Field 9 - Description (Vietnamese)**
 - Ask: "Provide the Vietnamese description, or leave blank and I will translate."
 - Constraint: max 50 words
 - If blank: recommend a natural Vietnamese translation of Field 8
@@ -112,25 +112,25 @@ After all 4 fields confirmed, summarise Group 2 and ask: "Group 2 confirmed. Rea
 
 ## Group 3: Features
 
-**Field 10 — Feature count**
+**Field 10 - Feature count**
 - Ask: "How many key features do you want to highlight? (3 or 4)"
 - Accept only 3 or 4
 
 Then for each feature (repeat FEATURE_COUNT times, label each as "Feature 1", "Feature 2", etc.):
 
-**Feature N — Title (English)**
-- Ask: "Feature [N] title in English — what is this feature called?"
+**Feature N - Title (English)**
+- Ask: "Feature [N] title in English - what is this feature called?"
 - Constraint: max 3 words
 - Recommend a clean, title-cased short label
 - If over 3 words: trim, label "Trimmed to fit limit:", re-ask
 
-**Feature N — Title (Vietnamese)**
+**Feature N - Title (Vietnamese)**
 - Ask: "Feature [N] title in Vietnamese? (Leave blank for suggestion)"
 - Constraint: max 5 words
 - If blank: recommend a Vietnamese translation of the English title
 
-**Feature N — Description (English)**
-- Ask: "Feature [N] — describe what this feature does in one short sentence."
+**Feature N - Description (English)**
+- Ask: "Feature [N] - describe what this feature does in one short sentence."
 - Constraint: max 12 words
 - Recommend a concise action-oriented sentence
 - If over 12 words: trim, label "Trimmed to fit limit:", re-ask
@@ -143,13 +143,13 @@ After all features confirmed, summarise Group 3 and ask: "Group 3 confirmed. Rea
 
 Ask these 4 fields in order:
 
-**Field — Contact info (English)**
+**Field - Contact info (English)**
 - Ask: "Who should employees contact for access or help? Provide a contact line."
 - Constraint: max 15 words
 - Recommend a clean contact sentence
 - If over 15 words: trim, label "Trimmed to fit limit:", re-ask
 
-**Field — Contact info (Vietnamese)**
+**Field - Contact info (Vietnamese)**
 - Ask: "Vietnamese contact line? (Leave blank for suggestion)"
 - Constraint: max 20 words
 - If blank: recommend a natural Vietnamese translation
@@ -160,7 +160,7 @@ After all 2 fields confirmed, summarise Group 4 and ask: "Group 4 confirmed. Rea
 
 ## Group 5: Screenshots (Optional)
 
-**Field — Screenshot count**
+**Field - Screenshot count**
 - Ask: "Would you like to include product screenshots? This is optional. If yes, how many? (1, 2, or 3). If not, just say no or 0 to skip."
 - Accept 0 (or "no"/"skip"), 1, 2, or 3
 - If 0 or skipped: skip the rest of Group 5 entirely and move to final review
@@ -168,10 +168,10 @@ After all 2 fields confirmed, summarise Group 4 and ask: "Group 4 confirmed. Rea
 
 Then for each screenshot (repeat SCREENSHOT_COUNT times):
 
-**Screenshot N — Filename**
-- Ask: "Screenshot [N] — what is the filename? (e.g., dashboard.png)"
+**Screenshot N - Filename**
+- Ask: "Screenshot [N] - what is the filename? (e.g., dashboard.png)"
 - The file must exist in `assets/screenshots/`
-- No recommendation — use exactly as provided
+- No recommendation - use exactly as provided
 
 After all filenames confirmed (or if count is 0), summarise Group 5 and ask: "Group 5 confirmed. Ready for the final review?"
 
@@ -180,7 +180,7 @@ After all filenames confirmed (or if count is 0), summarise Group 5 and ask: "Gr
 ## Recommendation Behavior
 
 - Tone: professional, concise, written for an internal company audience
-- Vietnamese: always natural idiomatic Vietnamese — never literal word-for-word translation
+- Vietnamese: always natural idiomatic Vietnamese - never literal word-for-word translation
 - Always state the word or character count alongside the recommendation:
   - For word-limited fields: "(X/Y words)"
   - For character-limited fields: "(X/Y chars)"
@@ -188,6 +188,11 @@ After all filenames confirmed (or if count is 0), summarise Group 5 and ask: "Gr
 - If the user's raw input exceeds the limit: do NOT advance. Trim or rewrite to fit, present as "Trimmed to fit limit: [text] (X/Y words)", and re-ask for confirmation
 
 ---
+
+## Strict Text Rules
+
+- **NEVER use em dashes** in any generated text. No `—` (U+2014) character anywhere in the poster output or recommended copy. Use hyphens `-` or periods `.` instead. This applies to all fields: titles, descriptions, contact info, Vietnamese text, and any AI-recommended copy.
+
 
 ## Validation Gate
 
@@ -208,9 +213,9 @@ HERO
   Description (VI):    [value]
 
 FEATURES ([count])
-  Feature 1:  [EN title] / [VI title] — [description]
-  Feature 2:  [EN title] / [VI title] — [description]
-  Feature 3:  [EN title] / [VI title] — [description]
+  Feature 1:  [EN title] / [VI title] - [description]
+  Feature 2:  [EN title] / [VI title] - [description]
+  Feature 3:  [EN title] / [VI title] - [description]
   [Feature 4: if applicable]
 
 FOOTER
@@ -248,7 +253,7 @@ When the user confirms, generate the poster as follows:
      - Now Live: `<div class="pill pill--live"><span class="dot dot--live"></span><span class="pill-text pill-text--live">Now Live</span></div>`
      - Coming Soon: `<div class="pill pill--soon"><span class="dot dot--soon"></span><span class="pill-text pill-text--soon">Coming Soon</span></div>`
      - Beta: `<div class="pill pill--beta"><span class="dot dot--beta"></span><span class="pill-text pill-text--beta">Beta</span></div>`
-   - `{{BENEFITS_CLASS}}` = `benefits--4` if 4 features, `benefits--3` if 3 features (only used by `base` layout; L3 layout does not use this token — leave it unreplaced, it will not appear in L3 template)
+   - `{{BENEFITS_CLASS}}` = `benefits--4` if 4 features, `benefits--3` if 3 features (only used by `base` layout; L3 layout does not use this token - leave it unreplaced, it will not appear in L3 template)
    - `{{HERO_TITLE_PREFIX}}` = all words in the title that come before the highlighted text (empty string if highlight starts the title)
    - `{{HERO_TITLE_SUFFIX}}` = all words in the title that come after the highlighted text (empty string if highlight ends the title)
 
@@ -271,9 +276,9 @@ When the user confirms, generate the poster as follows:
    - `{{F3_EN}}` → Feature 3 title (EN)
    - `{{F3_VI}}` → Feature 3 title (VI)
    - `{{F3_DESC}}` → Feature 3 description (EN)
-   - `{{F4_EN}}` → Feature 4 title (EN) — only used when FEATURE_COUNT = 4
-   - `{{F4_VI}}` → Feature 4 title (VI) — only used when FEATURE_COUNT = 4
-   - `{{F4_DESC}}` → Feature 4 description (EN) — only used when FEATURE_COUNT = 4
+   - `{{F4_EN}}` → Feature 4 title (EN) - only used when FEATURE_COUNT = 4
+   - `{{F4_VI}}` → Feature 4 title (VI) - only used when FEATURE_COUNT = 4
+   - `{{F4_DESC}}` → Feature 4 description (EN) - only used when FEATURE_COUNT = 4
    - `{{CONTACT_EN}}` → confirmed contact info (EN)
    - `{{CONTACT_VI}}` → confirmed contact info (VI)
    - `{{SCREENSHOTS}}` → generated screenshot HTML (see step 7)
@@ -319,9 +324,9 @@ When the user confirms, generate the poster as follows:
        - Adapt the bottom bar gradient to harmonize with the new palette
 
     d. **Pro variant constraints (must follow strictly):**
-       - Primary color MUST remain orange — the recommended palette supplements but does not replace orange
-       - Theme MUST be light — background must be a light color (white, cream, light gray, etc.)
-       - Logo MUST be the same transparent PNG — never change or remove it
+       - Primary color MUST remain orange - the recommended palette supplements but does not replace orange
+       - Theme MUST be light - background must be a light color (white, cream, light gray, etc.)
+       - Logo MUST be the same transparent PNG - never change or remove it
        - Bottom bar text MUST remain: left `WANEK FURNITURE CO., LTD.`, right `AI TEAM` with underline
        - Poster width MUST remain `540px`
        - All content (text, tokens, features, screenshots) MUST be identical to the standard poster
@@ -331,7 +336,7 @@ When the user confirms, generate the poster as follows:
        - Pro variant 1: `YYYY-MM-DD-[slug]-pro-1.html`
        - Pro variant 2: `YYYY-MM-DD-[slug]-pro-2.html`
 
-    f. If the `ui-ux-pro-max` search returns an error or no useful results, skip pro variants and inform the user: "Pro variants could not be generated — design system search returned no results."
+    f. If the `ui-ux-pro-max` search returns an error or no useful results, skip pro variants and inform the user: "Pro variants could not be generated - design system search returned no results."
 
 11. Tell the user:
     "Posters generated:
@@ -360,7 +365,7 @@ These values must appear verbatim in every standard poster:
 
 ### Pro variants (partially locked)
 
-These values are locked in pro variants — never change them:
+These values are locked in pro variants - never change them:
 
 - Bottom bar left: `WANEK FURNITURE CO., LTD.`
 - Bottom bar right: `AI TEAM` (with underline accent)
