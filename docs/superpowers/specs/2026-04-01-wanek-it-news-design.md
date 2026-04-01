@@ -25,7 +25,6 @@ Date: 2026-04-01
 | Bottom bar line 2 | `AI TEAM` - gold text `#f5b060` with gold underline accent, hardcoded, never editable |
 | Bottom bar background | `linear-gradient(135deg, #5a3e28, #a04e10)` - diagonal brown-to-orange |
 | Logo | `logo-removebg.png` - transparent PNG, baked into template as base64. No background, border, or shadow on logo container. |
-| CTA button | Removed - poster is a static image, buttons are not clickable |
 | Feature icons | Orange accent bar (`#e8903a`, 16×2px) - no emoji |
 | Scripts/tooling | None - skill is purely text-driven via SKILL.md |
 
@@ -41,10 +40,13 @@ it_news_template/
 │       └── create-poster/
 │           ├── SKILL.md                 (intake rules, constraints, generation instructions)
 │           └── templates/
-│               └── poster-light.html    (HTML template with {{TOKEN}} placeholders)
+│               ├── poster-light.html    (HTML template with {{TOKEN}} placeholders - base layout)
+│               └── poster-light-l3.html (HTML template - L3 stacked layout variant)
 ├── assets/
 │   ├── logo.jpg                         (source - baked into template as base64)
-│   └── base_poster.html                 (dark theme reference, archive only)
+│   ├── logo-removebg.png               (transparent PNG - baked into template as base64)
+│   ├── base_poster.html                 (dark theme reference, archive only)
+│   └── screenshots/                     (user-provided screenshots for embedding)
 ├── docs/
 │   └── superpowers/
 │       └── specs/
@@ -52,16 +54,6 @@ it_news_template/
 └── output/
     └── YYYY-MM-DD-<product-slug>.html   (generated posters)
 ```
-
----
-
-## Status Pill Variants
-
-| Status | Pill Color | Dot Color |
-|---|---|---|
-| Now Live | `rgba(74,222,128,0.1)` border `rgba(74,222,128,0.3)` | `#4ade80` |
-| Coming Soon | `rgba(245,158,11,0.1)` border `rgba(245,158,11,0.3)` | `#f59e0b` |
-| Beta | `rgba(96,165,250,0.1)` border `rgba(96,165,250,0.3)` | `#60a5fa` |
 
 ---
 
@@ -73,7 +65,6 @@ it_news_template/
 | `{{PRODUCT_NAME_VI}}` | User → AI recommendation | max 50 chars |
 | `{{DEPARTMENT}}` | User → AI recommendation | max 30 chars |
 | `{{LAUNCH_TYPE}}` | User selects | New Tool / System Update / Feature Release / New Platform |
-| `{{STATUS}}` | User selects | Now Live / Coming Soon / Beta |
 | `{{HERO_SUB}}` | Auto-generated | `{{DEPARTMENT}} · {{LAUNCH_TYPE}}` |
 | `{{HERO_TITLE_EN}}` | User → AI recommendation | max 6 words. **English only - intentional bilingual exception.** The hero title is a large display element; adding a VI line would break the visual hierarchy. |
 | `{{HERO_HIGHLIGHT}}` | User → AI recommendation | exact substring of `{{HERO_TITLE_EN}}` |
@@ -132,14 +123,15 @@ it_news_template/
 - No HTML output until user confirms
 
 ### Block 5 - Generation Instructions
-- Read `.augment/skills/create-poster/templates/poster-light.html` (workspace-relative path)
+- Select template based on `{{LAYOUT}}`:
+  - `base` → read `.augment/skills/create-poster/templates/poster-light.html`
+  - `l3` → read `.augment/skills/create-poster/templates/poster-light-l3.html`
 - Before replacing tokens, construct derived values:
   - `{{HERO_SUB}}` = `{{DEPARTMENT}} · {{LAUNCH_TYPE}}` (concatenated from confirmed Group 1 values)
 - Replace all `{{TOKEN}}` placeholders with confirmed values
 - Apply correct grid layout based on `{{FEATURE_COUNT}}`:
   - If `{{FEATURE_COUNT}}` = 4: use `grid-template-columns: 1fr 1fr` (2×2 grid), include all 4 feature blocks
   - If `{{FEATURE_COUNT}}` = 3: use `grid-template-columns: 1fr 1fr 1fr` (1×3 row), remove the entire 4th feature HTML block (`{{F4_EN}}`, `{{F4_VI}}`, `{{F4_DESC}}` and their wrapper element) from the output - do not leave empty or placeholder content
-- Apply correct pill color/dot color based on `{{STATUS}}` (see Status Pill Variants table)
 - `YYYY-MM-DD` in the output filename = current system date at generation time
 - Auto-generate output filename: `YYYY-MM-DD-<product-slug>.html` (slug = lowercase product name EN, spaces → hyphens, special chars stripped). If stripping produces an empty string, use the fallback slug `poster`
 - Save standard poster to `output/`
@@ -157,7 +149,7 @@ it_news_template/
   - Bottom bar text: locked (`WANEK FURNITURE CO., LTD.` + `AI TEAM`)
   - Width: 540px
   - Content: identical to standard poster
-- **Pro variants CAN change:** fonts (Google Fonts), background color (must be light), gradients, card styling, pill colors, accent colors
+- **Pro variants CAN change:** fonts (Google Fonts), background color (must be light), gradients, card styling, accent colors
 
 ### Block 7 - Locked Constants (standard poster)
 - Never modify regardless of user input: bottom bar text, stripe gradient, fonts, poster width, background color
@@ -171,7 +163,7 @@ it_news_template/
 2. Product name (VI) - AI recommends if user provides EN only
 3. Department / Team
 4. Launch type - select: New Tool / System Update / Feature Release / New Platform
-5. Status - select: Now Live / Coming Soon / Beta
+5. Layout variant - select: Base (2x2 / 1x3 grid) or L3 (stacked vertical rows)
 
 ### Group 2: Hero Section
 6. Hero title (EN) - max 6 words

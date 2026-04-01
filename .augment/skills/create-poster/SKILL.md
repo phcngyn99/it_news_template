@@ -59,22 +59,14 @@ Ask these 5 fields in order:
 - Accept number or text. Map to exact value: `New Tool`, `System Update`, `Feature Release`, `New Platform`
 - No recommendation needed - present the confirmed selection
 
-**Field 5 - Status**
-- Ask: "What is the current status? Choose one:
-  1. Now Live
-  2. Coming Soon
-  3. Beta"
-- Accept number or text. Map to exact value: `Now Live`, `Coming Soon`, `Beta`
-- No recommendation needed - present the confirmed selection
-
-**Field 6 - Layout variant**
+**Field 5 - Layout variant**
 - Ask: "Which layout do you prefer?
   1. Base - standard vertical stack with 2×2 feature grid (or 1×3 for 3 features)
   2. L3 - compact hero with full-width stacked feature rows, EN/VI titles inline"
 - Accept number or text. Map to exact value: `base` or `l3`
 - No recommendation needed - present the confirmed selection
 
-After all 6 fields confirmed, summarise Group 1 and ask: "Group 1 confirmed. Ready for Group 2?"
+After all 5 fields confirmed, summarise Group 1 and ask: "Group 1 confirmed. Ready for Group 2?"
 
 ---
 
@@ -204,7 +196,6 @@ PRODUCT BASICS
   Product name (VI):   [value]
   Department:          [value]
   Launch type:         [value]
-  Status:              [value]
 
 HERO
   Title:               [value]
@@ -249,10 +240,6 @@ When the user confirms, generate the poster as follows:
 
 2. Construct derived values before replacing tokens:
    - `{{HERO_SUB}}` = `[Department] · [Launch Type]`
-   - `{{STATUS_PILL}}` = the full pill HTML matching the confirmed status:
-     - Now Live: `<div class="pill pill--live"><span class="dot dot--live"></span><span class="pill-text pill-text--live">Now Live</span></div>`
-     - Coming Soon: `<div class="pill pill--soon"><span class="dot dot--soon"></span><span class="pill-text pill-text--soon">Coming Soon</span></div>`
-     - Beta: `<div class="pill pill--beta"><span class="dot dot--beta"></span><span class="pill-text pill-text--beta">Beta</span></div>`
    - `{{BENEFITS_CLASS}}` = `benefits--4` if 4 features, `benefits--3` if 3 features (only used by `base` layout; L3 layout does not use this token - leave it unreplaced, it will not appear in L3 template)
    - `{{HERO_TITLE_PREFIX}}` = all words in the title that come before the highlighted text (empty string if highlight starts the title)
    - `{{HERO_TITLE_SUFFIX}}` = all words in the title that come after the highlighted text (empty string if highlight ends the title)
@@ -260,7 +247,6 @@ When the user confirms, generate the poster as follows:
 3. Replace every `{{TOKEN}}` placeholder with its confirmed value using this exact map:
    - `{{PRODUCT_NAME_EN}}` → confirmed product name (EN)
    - `{{HERO_SUB}}` → derived value from step 2
-   - `{{STATUS_PILL}}` → derived HTML from step 2
    - `{{HERO_TITLE_PREFIX}}` → derived value from step 2
    - `{{HERO_HIGHLIGHT}}` → confirmed highlight word(s)
    - `{{HERO_TITLE_SUFFIX}}` → derived value from step 2
@@ -320,7 +306,7 @@ When the user confirms, generate the poster as follows:
        - Replace heading `font-family` with the recommended heading font
        - Replace body `font-family` with the recommended body font
        - Adjust color values (backgrounds, accents, text colors) using the recommended palette
-       - Adapt the top stripe gradient, feature card backgrounds, and pill accents to the new palette
+       - Adapt the top stripe gradient and feature card backgrounds to the new palette
        - Adapt the bottom bar gradient to harmonize with the new palette
 
     d. **Pro variant constraints (must follow strictly):**
@@ -381,7 +367,6 @@ These values CAN change in pro variants (driven by ui-ux-pro-max recommendations
 - Background color (must remain light)
 - Top stripe gradient (adapt to new palette, keep orange as primary)
 - Feature card backgrounds, borders, and accents
-- Status pill colors and styles
 - Footer gradient (adapt to new palette)
 - Contact text colors
 - Accent line and underline colors
