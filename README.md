@@ -10,15 +10,15 @@ Open this repo in your editor with Augment Agent active, then type:
 create poster
 ```
 
-The agent walks you through 5 groups of questions, recommends polished copy for each field, and generates a ready-to-screenshot HTML poster.
+The agent walks you through 5 groups of questions, recommends polished copy for each field, and generates a standard poster plus 1-2 pro design variants automatically.
 
 ## How It Works
 
 1. **You answer questions** -- product name, headline, features, contact info, optional screenshots
 2. **The agent recommends** -- refined copy, Vietnamese translations, word count checks
 3. **You confirm** -- lock each field, review the full summary
-4. **The agent generates** -- a self-contained HTML file in `output/`
-5. **You screenshot** -- open in browser, screenshot, embed in your email newsletter
+4. **The agent generates** -- a standard poster + 1-2 pro variants (via `ui-ux-pro-max` design system) in `output/`
+5. **You pick and screenshot** -- open in browser, pick the one you like, screenshot, embed in your email newsletter
 
 ## Intake Groups
 
@@ -39,18 +39,20 @@ The agent walks you through 5 groups of questions, recommends polished copy for 
 ## Project Structure
 
 ```
-.augment/skills/create-poster/
-  SKILL.md                          # Agent instructions (intake, validation, generation)
-  templates/
-    poster-light.html               # Base layout template
-    poster-light-l3.html            # L3 layout template
+.augment/skills/
+  create-poster/
+    SKILL.md                        # Agent instructions (intake, validation, generation)
+    templates/
+      poster-light.html             # Base layout template
+      poster-light-l3.html          # L3 layout template
+  ui-ux-pro-max/                    # Design system skill (used for pro variants)
 assets/
-    logo-removebg.png               # Wanek logo (transparent PNG)
-    screenshots/                    # Place product screenshots here
-output/                             # Generated posters land here
+  logo-removebg.png                 # Wanek logo (transparent PNG)
+  screenshots/                      # Place product screenshots here (optional)
+output/                             # Generated posters land here (gitignored)
 docs/superpowers/
-    specs/                          # Design specification
-    plans/                          # Implementation plan
+  specs/                            # Design specification
+  plans/                            # Implementation plan
 ```
 
 ## Design
@@ -65,13 +67,17 @@ docs/superpowers/
 
 ## Output
 
-Generated posters are saved to `output/` with the naming convention:
+Generated posters are saved to `output/` (gitignored) with the naming convention:
 
 ```
-YYYY-MM-DD-product-name.html
+YYYY-MM-DD-product-name.html          # Standard poster
+YYYY-MM-DD-product-name-pro-1.html    # Pro variant 1 (different fonts/colors)
+YYYY-MM-DD-product-name-pro-2.html    # Pro variant 2 (different fonts/colors)
 ```
 
-Open the HTML file in a browser, take a screenshot, and embed the image in your email newsletter.
+Pro variants are auto-generated using the `ui-ux-pro-max` design system. They keep orange as the primary color, the same logo, light theme, and identical content -- only fonts, colors, and accents change.
+
+Open each HTML file in a browser, pick the one you like best, take a screenshot, and embed the image in your email newsletter.
 
 ## Requirements
 
